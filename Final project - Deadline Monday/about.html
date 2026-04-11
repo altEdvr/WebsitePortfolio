@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="headersection">
+            <div class="logo"> WebDev. </div> 
+                <nav>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html" class="active">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+    </header>
+
+    <!-- About Introduction Section -->
+    <section>
+        <div class="container">
+            <h1>About Me</h1>
+            <p>A Passionate Student Leader, Athlete, and Creative Artist All the way from the province of La Union!</p>
+            
+        </div>
+    </section>
+
+    
+    <!-- Passion & Craft Section -->
+    <section>
+        <div class="container">
+            <h2>What I Love About My Craft</h2>
+            <p>My passion for video editing, photography, and graphic design stems from my desire to tell stories and capture moments that matter. Every frame, every transition, and every color choice is an opportunity to express creativity and connect with audiences on a deeper level. Whether I'm editing a highlight reel, composing a photograph, or designing a layout, I find joy in transforming ideas into visual masterpieces. The intersection of technology and artistry allows me to push boundaries and create work that inspires and engages.</p>
+             <div class="image-card">
+                <img src="Photowalk.jpg" alt="Edvir's Photo" class="section-image">
+            </div>
+        </div>
+    </section>        
+
+
+    <!-- Journey & Milestones Section with Ordered List -->
+    <section>
+        <div class="container">
+            <h2>My Journey & Milestones</h2>
+            <p>My path has been filled with growth, achievements, and meaningful experiences. Here's a timeline of my key milestones and experiences:</p>
+            <ol>
+                <li><strong>Discovery Phase:</strong> Started exploring photography and videography as a hobby during my early years in college</li>
+                <li><strong>Skill Development:</strong> Took formal courses in video editing, Adobe Creative Suite, and graphic design fundamentals</li>
+                <li><strong>Leadership Role:</strong> Became a student leader, guiding and mentoring others with determination and passion</li>
+                <li><strong>Athletic Achievement:</strong> Represented DMMMSU in SCUAA 2024, showcasing dedication beyond academics</li>
+                <li><strong>National Recognition:</strong> Competed in the Philippine National Games 2023 at the Rizal Memorial Complex</li>
+                <li><strong>Portfolio Growth:</strong> Built a diverse portfolio of video productions, photography series, and design projects</li>
+                <li><strong>Sharing My Story:</strong> Launched this platform to inspire others and showcase my journey to the world</li>
+            </ol>
+
+            <h2>SCUAA 2024 Highlights</h2>
+            <div class="image-card">
+                <img src="TKD.jpg" alt="Edvir's Taekwondo Highlights" class="section-image">
+            </div>
+
+            <h2>The Photographer</h2>
+            <div class="image-card">
+                <img src="Photographer.jpg" alt="Edvir's as Photographer" class="section-image">
+            </div>
+
+            <h2>My Artwork</h2>
+            <div class="image-card">
+                <img src="Photo1.jpg" alt="Artwork" class="section-image">
+            </div>
+            <div class="image-card">
+                <img src="Photo2.jpg" alt="Artwork" class="section-image">
+            </div>
+            <div class="image-card">
+                <img src="Photo 3.jpg" alt="Artwork" class="section-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspirational Quote Section -->
+    <section>
+        <div class="container">
+            <blockquote>
+                <p>"The only way to do great work is to love what you do." - Steve Jobs</p>
+                <p style="margin-top: 15px;">"Creativity is intelligence having fun." - Albert Einstein</p>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- inserted: Mini Game Section -->
+    <section id="mini-game" aria-labelledby="mini-game-title">
+      <h2 id="mini-game-title">Play: Guess the Number</h2>
+      <p class="instructions">I'm thinking of a number between <strong>1</strong> and <strong>100</strong>. You have <span id="max-attempts">7</span> attempts.</p>
+
+      <div class="game-controls">
+        <input id="guess-input" type="number" min="1" max="100" placeholder="Enter your guess" />
+        <button id="guess-btn" class="btn">Guess</button>
+        <button id="restart-btn" class="btn secondary">Restart</button>
+      </div>
+
+      <div id="message" class="game-message">Good luck!</div>
+      <div class="game-status">
+        Attempts left: <span id="attempts-left">7</span> — Your guesses: <span id="guesses">—</span>
+      </div>
+    </section>
+
+    <!-- added: simple Guess the Number game script -->
+    <script>
+    // Simple Guess the Number game (scoped to this page)
+    (function(){
+      const MIN = 1, MAX = 100, MAX_ATTEMPTS = 10;
+      const guessInput = document.getElementById('guess-input');
+      const guessBtn = document.getElementById('guess-btn');
+      const restartBtn = document.getElementById('restart-btn');
+      const messageEl = document.getElementById('message');
+      const attemptsLeftEl = document.getElementById('attempts-left');
+      const guessesEl = document.getElementById('guesses');
+      const maxAttemptsLabel = document.getElementById('max-attempts');
+
+      let secret, attemptsLeft, guesses;
+
+      function newGame(){
+        secret = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
+        attemptsLeft = MAX_ATTEMPTS;
+        guesses = [];
+        attemptsLeftEl.textContent = attemptsLeft;
+        guessesEl.textContent = '—';
+        messageEl.textContent = `I'm thinking of a number between ${MIN} and ${MAX}.`;
+        messageEl.style.color = '';
+        guessInput.disabled = false;
+        guessBtn.disabled = false;
+        guessInput.value = '';
+        maxAttemptsLabel.textContent = MAX_ATTEMPTS;
+        guessInput.focus();
+      }
+
+      function endGame(win){
+        guessInput.disabled = true;
+        guessBtn.disabled = true;
+        messageEl.textContent = win ? `Correct! The number was ${secret}.` : `Game over. The number was ${secret}.`;
+        messageEl.style.color = win ? 'green' : '#e11d48';
+      }
+
+      function updateGuesses(){
+        guessesEl.textContent = guesses.length ? guesses.join(', ') : '—';
+        attemptsLeftEl.textContent = attemptsLeft;
+      }
+
+      guessBtn.addEventListener('click', () => {
+        const val = Number(guessInput.value);
+        if (!val || val < MIN || val > MAX) {
+          messageEl.textContent = `Enter a number between ${MIN} and ${MAX}.`;
+          messageEl.style.color = '';
+          return;
+        }
+
+        if (attemptsLeft <= 0) return;
+
+        guesses.push(val);
+        attemptsLeft--;
+
+        if (val === secret) {
+          updateGuesses();
+          endGame(true);
+          return;
+        }
+
+        if (attemptsLeft === 0) {
+          updateGuesses();
+          endGame(false);
+          return;
+        }
+
+        const diff = Math.abs(val - secret);
+        let hint = val < secret ? 'Too low' : 'Too high';
+        if (diff <= 3) hint += ' — very close!';
+        else if (diff <= 10) hint += ' — close.';
+
+        messageEl.textContent = hint;
+        messageEl.style.color = '';
+        updateGuesses();
+        guessInput.value = '';
+        guessInput.focus();
+      });
+
+      restartBtn.addEventListener('click', newGame);
+      guessInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') guessBtn.click(); });
+
+      newGame();
+    })();
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; UNIDENTIFIED ARTIST. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

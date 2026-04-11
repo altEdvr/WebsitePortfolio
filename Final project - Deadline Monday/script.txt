@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <span id="nameError" class="error"></span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span id="emailError" class="error"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span id="passwordError" class="error"></span>
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword">
+            <span id="confirmPasswordError" class="error"></span>
+        </div>
+        <div>
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+            <span id="genderError" class="error"></span>
+        </div>
+        <div>
+            <label for="accountType">Account Type:</label>
+            <select id="accountType" name="accountType">
+                <option value="">Select Account Type</option>
+                <option value="basic">Basic</option>
+                <option value="premium">Premium</option>
+                <option value="admin">Admin</option>
+            </select>
+            <span id="accountTypeError" class="error"></span>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let gender = document.querySelector('input[name="gender"]:checked');
+            let accountType = document.getElementById("accountType").value; // Get selected account type
+
+            let nameError = document.getElementById("nameError");
+            let emailError = document.getElementById("emailError");
+            let passwordError = document.getElementById("passwordError");
+            let confirmPasswordError = document.getElementById("confirmPasswordError");
+            let genderError = document.getElementById("genderError");
+            let accountTypeError = document.getElementById("accountTypeError");
+
+            // Reset error messages
+            nameError.textContent = "";
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            confirmPasswordError.textContent = "";
+            genderError.textContent = "";
+            accountTypeError.textContent = "";
+
+            let isValid = true;
+
+            // Name validation
+            if (name === "") {
+                nameError.textContent = "Name is required";
+                isValid = false;
+            }
+
+            // Email validation
+            if (email === "") {
+                emailError.textContent = "Email is required";
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                emailError.textContent = "Invalid email format";
+                isValid = false;
+            }
+
+            // Password validation
+            if (password === "") {
+                passwordError.textContent = "Password is required";
+                isValid = false;
+            } else if (password.length < 😎 {
+                passwordError.textContent = "Password must be at least 8 characters";
+                isValid = false;
+            }
+
+            // Confirm Password validation
+            if (confirmPassword === "") {
+                confirmPasswordError.textContent = "Confirm Password is required";
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Passwords do not match";
+                isValid = false;
+            }
+
+            // Gender validation
+            if (!gender) {
+                genderError.textContent = "Gender is required";
+                isValid = false;
+            }
+
+            // Account Type validation
+            if (accountType === "") {
+                accountTypeError.textContent = "Account Type is required";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>

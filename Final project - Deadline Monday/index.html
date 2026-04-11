@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: Poppins;
+            background: #fff0e6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 40px;
+            margin-bottom: 30px;
+            animation: flow 3s ease-in-out infinite;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        h1{
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba (0,0,0, 0.3);
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border:  8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid white;
+            border-radius: 50%;
+            margin:  30px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 20px;
+            margin-top: 50px;
+            color: #662900;
+        }
+
+        .dots{
+            display: inline-block;
+            width: 30px;
+        }
+
+        .fade-out{
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="loader-conatainer">
+            <div class="logo"><img src="coffee-beans.png"></div>
+            <div class="spinner"></div>
+            <div class="loading-text">Loading<span class="dots" id="dots">...</span></div>
+        </div>
+
+        <script>
+            let dotCount = 0;
+            const dotsEl = document.getElementById('dots');
+            const dotInterval = setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                dotsEl.textContent = '.'.repeat(dotCount);
+            }, 500);
+
+            setTimeout (() => {
+                clearInterval(dotInterval);
+                document.querySelector('.loader-conatainer').classList.add('fade-out');
+                
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 500);
+            }, 3000);
+            
+
+        </script>
+</body>
+</html>

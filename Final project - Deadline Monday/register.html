@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Updates - Web Dev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="headersection">
+            <div class="logo"> WebDev. </div> 
+                <nav>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="register.html" class="active">Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+    </header>
+
+    <!-- Registration Form Section -->
+    <section>
+        <div class="container">
+            <h1 class="text-center">Join Me!</h1>
+
+            <!-- Sign In Form -->
+            <form id ="registration-form" onsubmit="return validateForm()">
+                <h2>Sign In</h2>
+                <p>Fill out the form below</p>
+
+                <div class="form-group">
+                    <label for="fullname">Full name: </label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                    <span class="error-message" id="fullname-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Preferred Username: </label>
+                    <input type="text" id="username" name="username" placeholder="Enter your preferred username" required>
+                    <span class="error-message" id="username-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="password" required>
+                    <span class="error-message" id="password-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                    <span class="error-message" id="confirm-password-error"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth: </label>
+                    <input type="date" id="dob" name="dob" required>
+                    <span class="error-message" id="dob-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Experience Level: </label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="experience" value="beginner" required>
+                                Beginner
+                            </label>
+
+                            <label>
+                                <input type="radio" name="experience" value="intermediate">
+                                Intermediate
+                            </label>
+
+                            <label>
+                                <input type="radio" name="experience" value="expert">
+                                Expert
+                            </label>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="gender" value="male" required>
+                            Male
+                        </label>
+
+                        <label>
+                            <input type="radio" name="gender" value="female">
+                            Female
+                        </label>
+
+                        <label>
+                            <input type="radio" name="gender" value="other">
+                            Other
+                        </label>
+                    </div>
+                    <span class="error-message" id="gender-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountType">Account Type:</label>
+                    <select id="accountType" name="accountType" required>
+                        <option value="">Select Account Type</option>
+                        <option value="basic">Basic</option>
+                        <option value="premium">Premium</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <span class="error-message" id="accountType-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="terms" name="term" required>
+                            <label for="terms">
+                                <span class="tick_mark"></span>
+                            </label>
+                        </div>
+                        <p class="checkbox-label-text" style="margin-top: 2;">I Agree to receive updates on my Mentorship with the Artist.</p>
+                    </div>
+                </div> 
+                <button type="submit" class="btn">Complete Registration</button>
+            </form>
+
+            <!-- Privacy & Data Protection Info -->
+            <div class="content-section mt-3">
+                <h2>Privacy & Data Protection</h2>
+                <p>Your privacy is important to us. We are committed to protecting your personal data and ensuring a safe experience while engaging with our content. By registering, you agree to our data handling practices as outlined in our Privacy Policy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; UNIDENTIFIED ARTIST. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        function validateForm() {
+            let fullname = document.getElementById("fullname").value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm-password").value;
+            let dob = document.getElementById("dob").value;
+            let experience = document.querySelector('input[name="experience"]:checked');
+            let gender = document.querySelector('input[name="gender"]:checked');
+            let accountType = document.getElementById("accountType").value;
+            let terms = document.getElementById("terms").checked;
+
+            let fullnameError = document.getElementById("fullname-error");
+            let usernameError = document.getElementById("username-error");
+            let passwordError = document.getElementById("password-error");
+            let confirmPasswordError = document.getElementById("confirm-password-error");
+            let dobError = document.getElementById("dob-error");
+            let genderError = document.getElementById("gender-error");
+            let accountTypeError = document.getElementById("accountType-error");
+
+            // Reset error messages
+            fullnameError.textContent = "";
+            usernameError.textContent = "";
+            passwordError.textContent = "";
+            confirmPasswordError.textContent = "";
+            dobError.textContent = "";
+            genderError.textContent = "";
+            accountTypeError.textContent = "";
+
+            let isValid = true;
+
+            // Full Name validation
+            if (fullname === "") {
+                fullnameError.textContent = "Full name is required";
+                isValid = false;
+            }
+
+            // Username validation
+            if (username === "") {
+                usernameError.textContent = "Username is required";
+                isValid = false;
+            }
+
+            // Password validation
+            if (password === "") {
+                passwordError.textContent = "Password is required";
+                isValid = false;
+            } else if (password.length < 8) {
+                passwordError.textContent = "Password must be at least 8 characters";
+                isValid = false;
+            }
+
+            // Confirm Password validation
+            if (confirmPassword === "") {
+                confirmPasswordError.textContent = "Confirm Password is required";
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Passwords do not match";
+                isValid = false;
+            }
+
+            // Date of Birth validation
+            if (!dob) {
+                dobError.textContent = "Date of birth is required";
+                isValid = false;
+            }
+
+            // Experience validation
+            if (!experience) {
+                alert("Please select your experience level");
+                isValid = false;
+            }
+
+            // Gender validation
+            if (!gender) {
+                genderError.textContent = "Gender is required";
+                isValid = false;
+            }
+
+            // Account Type validation
+            if (accountType === "") {
+                accountTypeError.textContent = "Account Type is required";
+                isValid = false;
+            }
+
+            // Terms validation
+            if (!terms) {
+                alert("You must agree to the terms");
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Show simple confirmation message
+                alert("Registration successful! Thank you for joining us, " + fullname + "!");
+                // Clear the form
+                document.getElementById("registration-form").reset();
+                return false; // Prevent form submission
+            }
+
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+    
+</body>
+</html>

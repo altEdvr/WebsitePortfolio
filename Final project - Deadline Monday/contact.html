@@ -29,7 +29,7 @@
             <p class="text-center">I'd love to hear from you! Whether you have a question, want to collaborate on a project, or just want to connect with a fellow web development enthusiast, feel free to reach out using the form below.</p>
 
             <!-- Contact Form -->
-            <form>
+            <form id="contact-form">
                 <h2>Send Me a Message</h2>
                 <div class="form-group">
                     <label for="name">Your Name:</label>
@@ -119,6 +119,38 @@
             <p>&copy; UNIDENTIFIED ARTIST. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Replace 'your-form-id' with your actual form ID
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+          };
+          
+          try {
+            const response = await fetch('/.netlify/functions/contact', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+              alert('Message sent successfully!');
+              e.target.reset();
+            } else {
+              alert('Error: ' + result.error);
+            }
+          } catch (error) {
+            alert('Failed to send message. Please try again.');
+          }
+        });
+    </script>
 
 </body>
 </html>

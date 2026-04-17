@@ -70,11 +70,59 @@
             </div>
     </section>
 
+    <!-- My Projects Section -->
+    <section>
+        <div class="container">
+            <h2 class="text-center">My Projects</h2>
+            <div id="projects-container" class="preview-grid">
+                <!-- Projects will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; UNIDENTIFIED ARTIST. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Fetch and display projects
+        async function loadProjects() {
+            try {
+                const response = await fetch('/.netlify/functions/projects');
+                const projects = await response.json();
+                
+                const container = document.getElementById('projects-container');
+                
+                if (projects.length === 0) {
+                    container.innerHTML = '<p>No projects available yet.</p>';
+                    return;
+                }
+                
+                projects.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'preview-card';
+                    
+                    projectCard.innerHTML = `
+                        <h3>${project.title || 'Untitled Project'}</h3>
+                        <p>${project.description || 'No description available.'}</p>
+                        ${project.image ? `<img src="${project.image}" alt="${project.title}" style="max-width: 100%; height: auto;">` : ''}
+                        ${project.link ? `<a href="${project.link}" class="btn" target="_blank">View Project</a>` : '<a href="#" class="btn">Coming Soon</a>'}
+                    `;
+                    
+                    container.appendChild(projectCard);
+                });
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('projects-container').innerHTML = '<p>Failed to load projects. Please try again later.</p>';
+            }
+        }
+        
+        // Load projects when page loads
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+
 </body>
 </html>

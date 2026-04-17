@@ -45,7 +45,7 @@ function WritePost() {
 
   const loadPostForEditing = async (id, token, role, userId) => {
     try {
-      const response = await fetch(`http://localhost:48000/api/posts/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
       const data = await response.json();
 
       if (data.success && data.post) {
@@ -124,7 +124,7 @@ function WritePost() {
           formDataToSend.append('image', imageFile);
         }
 
-        const url = isEditMode ? `http://localhost:48000/api/posts/${postId}` : 'http://localhost:48000/api/posts';
+        const url = isEditMode ? `${import.meta.env.VITE_API_URL}/api/posts/${postId}` : `${import.meta.env.VITE_API_URL}/api/posts`;
         const method = isEditMode ? 'PUT' : 'POST';
 
         const response = await fetch(url, {
@@ -165,7 +165,7 @@ function WritePost() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:48000/api/posts/${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

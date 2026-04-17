@@ -40,7 +40,7 @@ function Admin() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:48000/api/admin/users', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -62,7 +62,7 @@ function Admin() {
   const fetchContacts = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:48000/api/admin/contacts', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/contacts`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -87,7 +87,7 @@ function Admin() {
     try {
       const token = localStorage.getItem('authToken');
       console.log('Deleting user:', userId, 'with token:', token);
-      const response = await fetch(`http://localhost:48000/api/admin/users/${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -115,7 +115,7 @@ function Admin() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:48000/api/admin/contacts/${contactId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/contacts/${contactId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -138,7 +138,7 @@ function Admin() {
   const handleToggleUserStatus = async (userId, currentStatus) => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:48000/api/admin/users/${userId}/status`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users/${userId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

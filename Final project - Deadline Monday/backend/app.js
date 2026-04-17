@@ -32,7 +32,8 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 // Connect to MongoDB (optional for portfolio)
-mongoose.connect('mongodb://localhost:27017/portfolio', {
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))

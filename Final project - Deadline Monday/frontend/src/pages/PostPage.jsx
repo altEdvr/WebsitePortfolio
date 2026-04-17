@@ -26,7 +26,7 @@ function PostPage() {
 
   const fetchPost = async (id) => {
     try {
-      const response = await fetch(`http://localhost:48000/api/posts/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
       const data = await response.json();
       if (data.success) {
         setPost(data.post);
@@ -56,7 +56,7 @@ function PostPage() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:48000/api/posts/${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

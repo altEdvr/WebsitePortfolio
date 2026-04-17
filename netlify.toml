@@ -1,6 +1,9 @@
 [build]
-  publish = "Final project - Deadline Monday/"
-  command = "echo 'No build step'"
+  publish = "frontend/dist"
+  command = "cd frontend && npm run build"
+
+[build.environment]
+  VITE_API_URL = "https://your-vercel-backend-url.vercel.app"
 
 [functions]
   directory = "netlify/functions"

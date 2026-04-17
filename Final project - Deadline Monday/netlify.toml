@@ -1,8 +1,8 @@
 [build]
-  base    = "Final project - Deadline Monday"
-  command = "cd frontend && npm install && npm run build"
-  publish = "frontend/dist"
+  base      = "Final project - Deadline Monday"
+  publish   = "frontend/dist"
   functions = "netlify/functions"
+  command   = "cd frontend && npm install && npm run build"
 
 [[redirects]]
   from = "/api/*"

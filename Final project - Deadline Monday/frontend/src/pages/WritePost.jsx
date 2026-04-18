@@ -165,7 +165,7 @@ function WritePost() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
+      const response = await fetch(`${https://portfolio-backend-soyk.onrender.com}/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

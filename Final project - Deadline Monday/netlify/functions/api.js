@@ -322,3 +322,4 @@ app.delete('/api/admin/contacts/:id', async (req, res) => {
 });
 
 module.exports.handler = serverless(app);
+module.exports = app; // Add this line for Vercel

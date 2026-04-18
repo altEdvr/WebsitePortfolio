@@ -161,6 +161,69 @@ function Admin() {
     }
   };
 
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+
+    // Validate password match
+    if (newUser.password !== newUser.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    // Validate all required fields
+    if (!newUser.fullname || !newUser.username || !newUser.password || !newUser.dob || 
+        !newUser.experience || !newUser.gender || !newUser.accountType) {
+      setError('Please fill in all required fields');
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('authToken');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          fullname: newUser.fullname,
+          username: newUser.username,
+          password: newUser.password,
+          dob: newUser.dob,
+          experience: newUser.experience,
+          gender: newUser.gender,
+          accountType: newUser.accountType,
+          terms: newUser.terms
+        })
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        // Reset form and update users list
+        setNewUser({
+          fullname: '',
+          username: '',
+          password: '',
+          confirmPassword: '',
+          dob: '',
+          experience: '',
+          gender: '',
+          accountType: '',
+          terms: true
+        });
+        setShowCreateForm(false);
+        setError('');
+        // Refresh users list
+        await fetchUsers();
+      } else {
+        setError(data.message || 'Failed to create user');
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      setError('Error creating user');
+    }
+  };
+
   if (loading) {
     return <div className="container">Loading...</div>;
   }

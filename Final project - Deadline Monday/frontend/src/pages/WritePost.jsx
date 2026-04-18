@@ -165,7 +165,7 @@ function WritePost() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${https://portfolio-backend-soyk.onrender.com}/api/posts/${postId}`, {
+      const response = await fetch(`https://portfolio-backend-soyk.onrender.com/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

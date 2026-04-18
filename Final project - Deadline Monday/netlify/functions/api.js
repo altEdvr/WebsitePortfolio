@@ -106,7 +106,8 @@ app.post('/api/register', async (req, res) => {
       user: { id: newUser._id, username: newUser.username, fullname: newUser.fullname, accountType: newUser.accountType }
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Error registering user' });
+    console.error('Register error:', error);
+    res.status(500).json({ success: false, message: 'Error registering user', error: error.message });
   }
 });
 

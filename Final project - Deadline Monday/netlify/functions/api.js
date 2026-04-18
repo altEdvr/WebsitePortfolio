@@ -321,5 +321,12 @@ app.delete('/api/admin/contacts/:id', async (req, res) => {
   }
 });
 
-module.exports = app;
 module.exports.handler = serverless(app);
+module.exports = app;
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}

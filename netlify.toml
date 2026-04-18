@@ -1,0 +1,15 @@
+[build]
+  publish = "frontend/dist"
+  command = "cd frontend && npm run build"
+
+[build.environment]
+  VITE_API_URL = "/api"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/api/:splat"
+  status = 200

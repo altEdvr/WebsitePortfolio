@@ -45,7 +45,7 @@ function WritePost() {
 
   const loadPostForEditing = async (id, token, role, userId) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
+      const response = await fetch(`https://portfolio-backend-soyk.onrender.com/api/posts/${id}`);
       const data = await response.json();
 
       if (data.success && data.post) {
@@ -124,7 +124,7 @@ function WritePost() {
           formDataToSend.append('image', imageFile);
         }
 
-        const url = isEditMode ? `${import.meta.env.VITE_API_URL}/api/posts/${postId}` : `${import.meta.env.VITE_API_URL}/api/posts`;
+        const url = isEditMode ? `https://portfolio-backend-soyk.onrender.com/api/posts/${postId}` : `https://portfolio-backend-soyk.onrender.com/api/posts`;
         const method = isEditMode ? 'PUT' : 'POST';
 
         const response = await fetch(url, {

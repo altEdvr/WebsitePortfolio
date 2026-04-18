@@ -26,7 +26,7 @@ function Home() {
   const fetchPosts = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts`);
+      const response = await fetch(`https://portfolio-backend-soyk.onrender.com/api/posts`);
       const data = await response.json();
       if (data.success) {
         setPosts(data.posts || []);
@@ -57,7 +57,7 @@ function Home() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
+      const response = await fetch(`https://portfolio-backend-soyk.onrender.com/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

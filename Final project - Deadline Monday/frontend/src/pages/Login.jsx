@@ -37,7 +37,7 @@ function Login() {
       setSubmitMessage('');
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+        const response = await fetch(`https://portfolio-backend-soyk.onrender.com/api/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
